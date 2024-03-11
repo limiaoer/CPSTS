@@ -6,11 +6,15 @@ The CPSTS system is a resource modeling and security verification system designe
 In summary, this system provides a convenient and efficient way to establish CPS resource models and conduct temporal security verification. It is user-friendly and practical, aimed at assisting users in better understanding and analyzing the design and performance of CPS systems. 
 
 CPSTS
+
 ---| CPSTS  //Release version of the software
+
 ------| bigraph //bipartite graph models
+
 ------| processEvent  //process events
-------| tesingRes  //test results
-------| CPSMC  //software launch portal
+
+------| tesingRes  //test results.
+------| CPSMC  //software launch portal.
 ---| CPSTS-QT  //software source code, including front-end and back-end
 ------| bigraph
 ------| img
