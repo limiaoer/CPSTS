@@ -13,19 +13,32 @@ CPSTS
 
 ------| processEvent  //process events
 
-------| tesingRes  //test results.
-------| CPSMC  //software launch portal.
+------| tesingRes  //test results
+
+------| CPSMC  //software launch portal
+
 ---| CPSTS-QT  //software source code, including front-end and back-end
+
 ------| bigraph
+
 ------| img
+
 ------| processEvent
+
 ------| testingRes
+
 ------| main.cpp
+
 ------| mainwindow.cpp //front-end
+
 ------| mainwindow.h
+
 ------| test.cpp  //back-end:model verification
+
 ------| test.h
+
 ------| translate.cpp  //back-end:model transformation
+
 ------| translate.h
 
 The source of the paper for this project is Chen XY, Zhu Y, Zhao Y, Wang JY. "Modeling and safety verification method for CPS topology and time constrained resource." Journal of Software, 2022 (in Chinese).http://www.jos.org.cn/1000-9825/6600.htm
