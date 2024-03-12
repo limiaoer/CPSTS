@@ -1,0 +1,118 @@
+%active mall : 1;
+%active school : 1;
+%active construction : 1;
+%active parklot : 1;
+%active road1 : 1;
+%active road2 : 1;
+%active road3 : 1;
+%active crosswalk : 1;
+%active city : 1;
+
+%active driver : 11;
+%active guard : 3;
+%active driver2 : 5;
+
+%active car : 1;
+
+%passive leftsign : 2;
+%passive parksign : 2;
+
+%active spot : 6;
+%active IPMS : 2;
+%active server : 2;
+%active DCM : 1;
+%active DM : 2;
+%active EM : 2;
+%active record : 1;
+
+%active GET : 2;
+%active G : 2;
+%active EXE : 2;
+
+%active SMM : 4;
+%active SSU : 4;
+%active SNU : 4;
+%active AU : 4;
+%active BU : 4;
+%active DMM : 4;
+%active SW : 4;
+%active DMU : 4;
+
+%name e1;
+%name e2;
+%name e3;
+%name e4;
+%name e5;
+%name e6;
+%name e7;
+%name e8;
+%name e9;
+%name e10;
+%name e11;
+%name e12;
+%name sp;
+%name pk;
+%name lt;
+%name cw;
+%name au;
+%name bu;
+%name u;
+%name sn;
+%name ss;
+%name cname;
+%name dm;
+%name name;
+%name m;
+%name logg;
+%name g;
+%name sp1;
+%name sp2;
+%name sp3;
+%name sp4;
+%name sp5;
+%name sp6;
+%name used;
+%name work;
+
+%outer sp;
+%outer pk;
+%outer lt;
+%outer cw;
+%outer au;
+%outer bu;
+%outer u;
+%outer sn;
+%outer ss;
+%outer cname;
+%outer dm;
+%outer name;
+%outer m;
+%outer logg;
+%outer g;
+%outer sp1;
+%outer sp2;
+%outer sp3;
+%outer sp4;
+%outer sp5;
+%outer sp6;
+%outer used;
+%outer work;
+
+mall[work]|shcool|construction|road2.(parksign[pk]|leftsign[lf])|road3|parklot[work].mainarea.(spot[-,-,-,-,-,-]|guard[jack,-,-]|guardroom.(server.IPMS.(DCM[e2]|DM[e1,e2]|EM[e1,login]|record[re])))|road1.(driver[e5,e6,tom,-,-,-,-,-,-,-,-].(GET[e3,e5]|G[e3,e4]|EXE[e4,e6])|car[c1].(SMM[e7,e8,e9,e10]|SSU[e10,ss]|SNU[e9,sn]|AU[e8,au]|BU[e7,bu]|DMM[e11,e12]|SW[e11,sw]|DMU[e12,dm])|crosswalk[-]);
+
+road2.$0|road1.(driver[e5,e6,tom,-,-,-,-,-,-,-,-].$1|$2)|$3->road2.($0|(driver[e5,e6,tom,-,-,-,-,-,-,-,-].$1))|road1.($2)|$3;
+
+road2.($0|driver[e5,e6,tom,-,-,-,-,-,-,-,-].$1)|parklot[work].mainarea.$2|$3->road2.$0|parklot[work].mainarea.(driver[e5,e6,tom,-,-,-,-,-,-,-,-].$1|$2)|$3;
+
+parklot[work].mainarea.(guard[jack,-,-]|guardroom.$0|$1)|$2->parklot[work].mainarea.(guardroom.($0|guard[jack,-,-])|$1)|$2;
+
+parklot[work].mainarea.((driver[e5,e6,tom,-,-,-,-,-,-,-,-].$1|guardroom.(guard[jack,l,-]|$2)|$3))|$4->parklot[work].mainarea.((guardroom.(guard[jack,login,-]|driver[e5,e6,tom,-,-,-,-,-,-,-,-].$1|$2)|$3))|$4;
+
+parklot[work].mainarea.((guardroom.(guard[jack,login,-]|driver[e5,e6,tom,-,-,-,-,-,-,-,-].$1|$2)|$3))|$4->parklot[work].mainarea.((guardroom.(guard[jack,login,-]|driver[e5,e6,tom,-,-,-,-,-,-,login,re].$1|$2)|$3))|$4;
+
+parklot[work].mainarea.(guardroom.($0|guard[jack,-,-])|$1)|$2->parklot[work].mainarea.(guardroom.($0|guard[jack,login,-])|$1)|$2;
+
+parklot[work].mainarea.(guardroom.($0|guard[jack,login,-])|$1)|$2->parklot[work].mainarea.(guard[jack,-,-]|guardroom.$0|$1)|$2;
+
+%property CppResourceSecue !matches(parklot[work].mainarea.(guard[jack,login,-]|guardroom.(driver[e5,e6,tom,-,-,-,-,-,-,login,re].$1|$2)|$3)|$4);
+%check

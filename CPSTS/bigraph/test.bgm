@@ -1,0 +1,2 @@
+%property CppResourceSecue !matches(parklot[work].mainarea.(guard[jack,login,-]|guardroom.(driver[e5,e6,tom,-,-,-,-,-,-,login,re].$1|$2)|$3)|$4);
+%check

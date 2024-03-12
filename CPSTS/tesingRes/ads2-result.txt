@@ -1,0 +1,24 @@
+=======Judging Time is Starting=======
+
+=======Judge Time Start=======
+
+Time allowed
+
+=======Judging Time is Over=======
+
+*** Found violation of property: CppResourceSecue
+
+*** CppResourceSecue: !matches(...)
+
+#0  (spot5.nil | spot3.(AV.nil | car4.nil))   <- *** VIOLATION ***
+
+ >> (spot5.($0 | AV.$1) | spot3.$2) -> (spot5.$0 | spot3.(AV.$1 | $2))
+
+
+
+#1  (spot5.AV.nil | spot3.car4.nil)
+
+ >> (root)
+
+[mc::step] Counter-example found.
+

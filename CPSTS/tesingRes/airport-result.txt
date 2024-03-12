@@ -1,0 +1,12 @@
+=======Judging Time is Starting=======
+
+=======Judge Time Start=======
+
+Time allowed
+
+=======Judging Time is Over=======
+
+[mc::step] Complete!
+
+[mc::report] [q: 0 / g: 6] @ 7
+

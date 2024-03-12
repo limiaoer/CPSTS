@@ -1,0 +1,78 @@
+#position
+%active road1 : 1;
+%active road2 : 1;
+%active road3 : 1;
+%active spot1 : 1;
+%active spot2 : 1;
+%active spot3 : 1;
+%active spot4 : 1;
+%active spot5 : 1;
+%active spot6 : 1;
+%active normalarea : 1;
+
+#sign
+%passive speedsign : 2;
+%passive photosign : 2;
+
+#system
+%active ADS : 2;
+%active PM : 1;
+%active DM : 2;
+%active EM : 2;
+
+#AV
+%active SCM : 4;
+%active DCM : 4;
+%active SRU : 4；
+%active SBU :4;
+%active AU : 4;
+%active BU : 4;
+%active DRU : 4;
+%active SWU :4;
+
+#edges
+%name e1;
+%name e2;
+%name e3;
+%name e4;
+%name e5;
+%name e6;
+%name e7;
+%name e8;
+
+%outer spo1;
+%outer spo2;
+%outer spo3;
+%outer spo4;
+%outer spo5;
+%outer spo6;
+%outer ca1;
+%outer ca2;
+%outer ca3;
+%outer ca4;
+%outer sp;
+%outer ph;
+%outer pe;
+%outer sru;
+%outer sbu;
+%outer au;
+%outer du;
+%outer swu;
+%outer dru;
+%outer nr;
+
+#initial
+road1.(spot1[spo1].car3[ca3]|spot4[spo4].car1[ca1])|
+road2.(normalarea[nr]|spot2[spo2].car2[ca2]|spot5[spo5].HV.(ADS.(PM[e1]|DM[e1,e2]|EM[e2])|car.(SCM[e3,[e4,e5,e6]|SRU[e3,sru]|SBU[e4,sbu]|AU[e5,au]|DU[e6,du]|DCM[e7,e8]|SWU[e7,swu]|DRU[e8,dru]))|
+road3.(spot3[spo3].(car4[ca4]|speedsign[sp]|photosign[ph])|spot6[spo6]);
+
+#turnleft
+spot1[spo1].$0|spot5.(HV.(ADS.$1|car.$2|$3))|$4->
+spot1[spo1].($0|HV.(ADS.$1|car.$2|$3))|spot5.$4;
+
+#turnright
+spot1[spo1].($0|HV.(ADS.$1|car.$2|$3))|normalarea[nr].$4->
+spot1[spo1].$0|normalarea[nr].(HV.(ADS.$1|car.$2|$3))|$4;
+
+%property CppResourceSecue !matches(spot1[spo1].(car3[ca3]|HV.(ADS.$1|car.$2|$3)|$4)|$5);
+%check

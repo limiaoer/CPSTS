@@ -1,0 +1,48 @@
+=======Judging Time is Starting=======
+
+=======Judge Time Start=======
+
+Time allowed
+
+=======Judging Time is Over=======
+
+*** Found violation of property: CppResourceSecue
+
+*** CppResourceSecue: !matches(...)
+
+#0  (parklot[work].mainarea.(guard[jack,-,-].nil | guardroom.(driver[e5,e6,tom,-,-,-,-,-,-,-,-].(GET[e3,e5].nil | G[e3,e4].nil | EXE[e4,e6].nil) | server.IPMS.(DCM[e2].nil | DM[e1,e2].nil | EM[e1,login].nil | record[re].nil)) | spot[-,-,-,-,-,-].nil) | road2.(parksign[pk].nil | leftsign[lf].nil) | road1.(car[c1].(SMM[e7,e8,e9,e10].nil | SSU[e10,ss].nil | SNU[e9,sn].nil | AU[e8,au].nil | BU[e7,bu].nil | DMM[e11,e12].nil | SW[e11,sw].nil | DMU[e12,dm].nil) | crosswalk[-].nil) | mall[work].nil | shcool.nil | construction.nil | road3.nil)   <- *** VIOLATION ***
+
+ >> (parklot[work].mainarea.(guardroom.($0 | guard[jack,login,-].nil) | $1) | $2) -> (parklot[work].mainarea.(guard[jack,-,-].nil | guardroom.$0 | $1) | $2)
+
+
+
+#1  (parklot[work].mainarea.(guardroom.(guard[jack,-,-].nil | driver[e5,e6,tom,-,-,-,-,-,-,-,-].(GET[e3,e5].nil | G[e3,e4].nil | EXE[e4,e6].nil) | server.IPMS.(DCM[e2].nil | DM[e1,e2].nil | EM[e1,login].nil | record[re].nil)) | spot[-,-,-,-,-,-].nil) | road2.(parksign[pk].nil | leftsign[lf].nil) | road1.(car[c1].(SMM[e7,e8,e9,e10].nil | SSU[e10,ss].nil | SNU[e9,sn].nil | AU[e8,au].nil | BU[e7,bu].nil | DMM[e11,e12].nil | SW[e11,sw].nil | DMU[e12,dm].nil) | crosswalk[-].nil) | mall[work].nil | shcool.nil | construction.nil | road3.nil)
+
+ >> (parklot[work].mainarea.(driver[e5,e6,tom,-,-,-,-,-,-,-,-].$1 | guardroom.(guard[jack,l,-].nil | $2) | $3) | $4) -> (parklot[work].mainarea.(guardroom.(guard[jack,login,-].nil | driver[e5,e6,tom,-,-,-,-,-,-,-,-].$1 | $2) | $3) | $4)
+
+
+
+#2  (road2.(parksign[pk].nil | leftsign[lf].nil) | parklot[work].mainarea.(guardroom.(server.IPMS.(DCM[e2].nil | DM[e1,e2].nil | EM[e1,login].nil | record[re].nil) | guard[jack,-,-].nil) | driver[e5,e6,tom,-,-,-,-,-,-,-,-].(GET[e3,e5].nil | G[e3,e4].nil | EXE[e4,e6].nil) | spot[-,-,-,-,-,-].nil) | road1.(car[c1].(SMM[e7,e8,e9,e10].nil | SSU[e10,ss].nil | SNU[e9,sn].nil | AU[e8,au].nil | BU[e7,bu].nil | DMM[e11,e12].nil | SW[e11,sw].nil | DMU[e12,dm].nil) | crosswalk[-].nil) | mall[work].nil | shcool.nil | construction.nil | road3.nil)
+
+ >> (parklot[work].mainarea.(guard[jack,-,-].nil | guardroom.$0 | $1) | $2) -> (parklot[work].mainarea.(guardroom.($0 | guard[jack,-,-].nil) | $1) | $2)
+
+
+
+#3  (road2.(parksign[pk].nil | leftsign[lf].nil) | parklot[work].mainarea.(driver[e5,e6,tom,-,-,-,-,-,-,-,-].(GET[e3,e5].nil | G[e3,e4].nil | EXE[e4,e6].nil) | spot[-,-,-,-,-,-].nil | guard[jack,-,-].nil | guardroom.server.IPMS.(DCM[e2].nil | DM[e1,e2].nil | EM[e1,login].nil | record[re].nil)) | road1.(car[c1].(SMM[e7,e8,e9,e10].nil | SSU[e10,ss].nil | SNU[e9,sn].nil | AU[e8,au].nil | BU[e7,bu].nil | DMM[e11,e12].nil | SW[e11,sw].nil | DMU[e12,dm].nil) | crosswalk[-].nil) | mall[work].nil | shcool.nil | construction.nil | road3.nil)
+
+ >> (road2.($0 | driver[e5,e6,tom,-,-,-,-,-,-,-,-].$1) | parklot[work].mainarea.$2 | $3) -> (road2.$0 | parklot[work].mainarea.(driver[e5,e6,tom,-,-,-,-,-,-,-,-].$1 | $2) | $3)
+
+
+
+#4  (road2.(parksign[pk].nil | leftsign[lf].nil | driver[e5,e6,tom,-,-,-,-,-,-,-,-].(GET[e3,e5].nil | G[e3,e4].nil | EXE[e4,e6].nil)) | road1.(car[c1].(SMM[e7,e8,e9,e10].nil | SSU[e10,ss].nil | SNU[e9,sn].nil | AU[e8,au].nil | BU[e7,bu].nil | DMM[e11,e12].nil | SW[e11,sw].nil | DMU[e12,dm].nil) | crosswalk[-].nil) | mall[work].nil | shcool.nil | construction.nil | road3.nil | parklot[work].mainarea.(spot[-,-,-,-,-,-].nil | guard[jack,-,-].nil | guardroom.server.IPMS.(DCM[e2].nil | DM[e1,e2].nil | EM[e1,login].nil | record[re].nil)))
+
+ >> (road2.$0 | road1.(driver[e5,e6,tom,-,-,-,-,-,-,-,-].$1 | $2) | $3) -> (road2.($0 | driver[e5,e6,tom,-,-,-,-,-,-,-,-].$1) | road1.$2 | $3)
+
+
+
+#5  (mall[work].nil | shcool.nil | construction.nil | road2.(parksign[pk].nil | leftsign[lf].nil) | road3.nil | parklot[work].mainarea.(spot[-,-,-,-,-,-].nil | guard[jack,-,-].nil | guardroom.server.IPMS.(DCM[e2].nil | DM[e1,e2].nil | EM[e1,login].nil | record[re].nil)) | road1.(driver[e5,e6,tom,-,-,-,-,-,-,-,-].(GET[e3,e5].nil | G[e3,e4].nil | EXE[e4,e6].nil) | car[c1].(SMM[e7,e8,e9,e10].nil | SSU[e10,ss].nil | SNU[e9,sn].nil | AU[e8,au].nil | BU[e7,bu].nil | DMM[e11,e12].nil | SW[e11,sw].nil | DMU[e12,dm].nil) | crosswalk[-].nil))
+
+ >> (root)
+
+[mc::step] Counter-example found.
+

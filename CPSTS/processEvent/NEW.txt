@@ -1,0 +1,11 @@
+Position:={mall(1,school(1,construction(1,parklot(1,road1(1,road2(1,road3(1,crosswalk(1,city(1}
+Man:={driver(11,guard(3,driver2(5}
+Car:={car(1}
+Sign:={leftsign(2,parksign(2}
+Parklot:={spot(6,IPMS(2,server(2,DCM(1,DM(2,EM(2,record(1}
+Driver:={GET(2,G(2,EXE(2}
+Car:={SMM(4,SSU(4,SNU(4,AU(4,BU(4,DMM(4,SW(4,DMU(4}
+Eges:={e1,e2,e3,e4,e5,e6,e7,e8,e9,e10,e11,e12,sp,pk,lt,cw,au,bu,u,sn,ss,cname,dm,name,m,logg,g,sp1,sp2,sp3,sp4,sp5,sp6,used,work}
+Outer:={sp,pk,lt,cw,au,bu,u,sn,ss,cname,dm,name,m,logg,g,sp1,sp2,sp3,sp4,sp5,sp6,used,work}
+PL(mall,school,parklot(mainarea(spot,guard,guardroom(server)),construction,road1(crosswalk,car,driver),road2(leftsign,parksign),road3)
+Rules=(enter↘(r,road2) STOP)||(5,20)>>(enter↘ ( r,mainarea) STOP)||Fjudge(Fptp(x,y,z),guardroom)˄(5,20)>>(enter↘(r ,guardroom)STOP)||Fjudge(Fptp(x,y,z)1,guardroom)˄(5,20)>>(read↘(r,record) STOP)||Fjudge(Fptp(x,y,z),parklot)n(5,20)>>(login↘ (r,IPMS) STOP)||Fjudge(Fptp(x,y,z),guardroom)˄(5,20)>>(exit ↘( r,guardroom) STOP)  

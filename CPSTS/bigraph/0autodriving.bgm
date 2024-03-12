@@ -1,0 +1,308 @@
+#position
+%active mall : 1;
+%active school : 1;
+%active construction : 1;
+%active parklot : 1;
+%active road1 : 1;
+%active road2 : 1;
+%active road3 : 1;
+%active crosswalk : 1;
+%active city : 1;
+
+#man
+%active driver : 11;
+%active guard : 3;
+#%active driver2 : 5;
+
+#car
+%active car : 1;
+#%active C2 : 1;
+
+#sign
+%passive leftsign : 2;
+%passive parksign: 2;
+
+#parklot
+%active spot : 6;
+%active IPMS : 2;
+%active server : 2;
+%active DCM : 1;
+%active DM : 2;
+%active EM : 2;
+%active record : 1;
+
+#driver
+%active GET : 2;
+%active G : 2;
+%active EXE : 2;
+
+#car
+%active SMM : 4;
+%active SSU : 4;
+%active SNU : 4;
+%active AU : 4;
+%active BU : 4;
+%active DMM : 4;
+%active SW : 4;
+%active DMU : 4;
+
+#edges
+%name e1;
+%name e2;
+%name e3;
+%name e4;
+%name e5;
+%name e6;
+%name e7;
+%name e8;
+%name e9;
+%name e10;
+%name e11;
+%name e12;
+
+%outer sp;
+%outer pk;
+%outer lt;
+%outer cw;
+%outer au;
+%outer bu;
+%outer u;
+%outer sn;
+%outer ss;
+%outer cname;
+%outer dm;
+
+%outer name;
+
+%outer m;
+%outer logg;
+%outer g;
+
+%outer sp1;
+%outer sp2;
+%outer sp3;
+%outer sp4;
+%outer sp5;
+%outer sp6;
+
+%outer used;
+%outer work;
+
+
+#initial state
+mall[work]|shcool|construction|road2.(parksign[pk]|leftsign[lf])|road3|parklot[work].mainarea.(spot[-,-,-,-,-,-]|guard[jack,-,-]|guardroom.(
+server.IPMS.(DCM[e2]|DM[e1,e2]|EM[e1,login]|record[re])))|road1.(driver[e5,e6,tom,-,-,-,-,-,-,-,-].(GET[e3,e5]|G[e3,e4]|EXE[e4,e6])
+|car[c1].(SMM[e7,e8,e9,e10]|SSU[e10,ss]|SNU[e9,sn]|AU[e8,au]|BU[e7,bu]|DMM[e11,e12]|SW[e11,sw]|DMU[e12,dm])|crosswalk[-]);
+
+#RULE1 in
+driver[e5,e6,tom,-,-,-,-,-,-,-,-].$0|car[c1].$1|$2->
+car[c1].(driver[e5,e6,tom,-,-,-,-,-,-,-,-].$0|$1)|$2;
+
+#RULE2 out
+car[c1].(driver[e5,e6,tom,-,-,-,-,-,-,-,-].$0|$1)|$2->driver[e5,e6,tom,-,-,-,-,-,-,-,-].$0|car[c1].$1|$2;
+
+#RULES start driverconnect to s
+car[c1].(driver[e5,e6,tom,-,-,-,-,-,-,-,-].$0|SMM[e7,e8,e9,e10]|SSU[e10,ss]|SNU[e9,sn]|AU[e8,au]|BU[e7,bu]|DMM[e11,e12]|SW[e11,sw]|DMU[e12,dm])
+->
+car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$0|SMM[e7,e8,e9,e10]|SSU[e10,ss]|SNU[e9,sn]|AU[e8,au]|BU[e7,bu]|DMM[e11,e12]|SW[e11,sw]|DMU[e12,dm]);
+
+#RULES stop
+car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$0|SMM[e7,e8,e9,e10]|SSU[e10,ss]|SNU[e9,sn]|AU[e8,au]|BU[e7,bu]|DMM[e11,e12]|SW[e11,sw]|DMU[e12,dm])
+->
+car[c1].(driver[e5,e6,tom,-,-,-,-,-,-,-,-].$0|SMM[e7,e8,e9,e10]|SSU[e10,ss]|SNU[e9,sn]|AU[e8,au]|BU[e7,bu]|DMM[e11,e12]|SW[e11,sw]|DMU[e12,dm]);
+
+#RULES turn driver.sw,dwu. SW,DMU->lt 
+road2.(leftsign[lt].(car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$0)|SMM[e7,e8,e9,e10]|SSU[e10,ss]|SNU[e9,sn]|AU[e8,au]|BU[e7,bu]|DMM[e11,e12]|SW[e11,sw]|DMU[e12,dm]))
+->
+road2.(leftsign[lt].(car[c1].(driver[e5,e6,tom,s,-,-,-,lt,lt,-,-].$0)|SMM[e7,e8,e9,e10]|SSU[e10,ss]|SNU[e9,sn]|AU[e8,au]|BU[e7,bu]|DMM[e11,e12]|SW[e11,lt]|DMU[e12,lt]));
+
+#RULES turnback driver.sw,dwu. SW,DMU->lt 
+road2.(leftsign[lt].(car[c1].(driver[e5,e6,tom,s,-,-,-,lt,lt,-,-].$0)|SMM[e7,e8,e9,e10]|SSU[e10,ss]|SNU[e9,sn]|AU[e8,au]|BU[e7,bu]|DMM[e11,e12]|SW[e11,lt]|DMU[e12,lt]))->
+road2.(leftsign[lt].(car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$0)|SMM[e7,e8,e9,e10]|SSU[e10,ss]|SNU[e9,sn]|AU[e8,au]|BU[e7,bu]|DMM[e11,e12]|SW[e11,sw]|DMU[e12,dm]));
+
+
+#RULES brake
+car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$0|SMM[e7,e8,e9,e10]|SSU[e10,ss]|SNU[e9,sn]|AU[e8,au]|BU[e7,bu]|DMM[e11,e12]|SW[e11,sw]|DMU[e12,dm])
+->
+car[c1].(driver[e5,e6,tom,s,-,-,b,-,-,-,-].$0|SMM[e7,e8,e9,e10]|SSU[e10,ss]|SNU[e9,sn]|AU[e8,au]|BU[e7,bu]|DMM[e11,e12]|SW[e11,sw]|DMU[e12,dm]);
+#RULES unbrake
+car[c1].(driver[e5,e6,tom,s,-,-,b,-,-,-,-].$0|SMM[e7,e8,e9,e10]|SSU[e10,ss]|SNU[e9,sn]|AU[e8,au]|BU[e7,bu]|DMM[e11,e12]|SW[e11,sw]|DMU[e12,dm])
+->
+car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$0|SMM[e7,e8,e9,e10]|SSU[e10,ss]|SNU[e9,sn]|AU[e8,au]|BU[e7,bu]|DMM[e11,e12]|SW[e11,sw]|DMU[e12,dm]);
+
+#RULES accelerate
+car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$0|SMM[e7,e8,e9,e10]|SSU[e10,ss]|SNU[e9,sn]|AU[e8,au]|BU[e7,bu]|DMM[e11,e12]|SW[e11,sw]|DMU[e12,dm])
+->
+car[c1].(driver[e5,e6,tom,s,-,a,-,-,-,-,-].$0|SMM[e7,e8,e9,e10]|SSU[e10,ss]|SNU[e9,sn]|AU[e8,au]|BU[e7,bu]|DMM[e11,e12]|SW[e11,sw]|DMU[e12,dm]);
+#RULES unaccelerate
+car[c1].(driver[e5,e6,tom,s,-,a,-,-,-,-,-].$0|SMM[e7,e8,e9,e10]|SSU[e10,ss]|SNU[e9,sn]|AU[e8,au]|BU[e7,bu]|DMM[e11,e12]|SW[e11,sw]|DMU[e12,dm])
+->
+car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$0|SMM[e7,e8,e9,e10]|SSU[e10,ss]|SNU[e9,sn]|AU[e8,au]|BU[e7,bu]|DMM[e11,e12]|SW[e11,sw]|DMU[e12,dm]);
+
+##RULES login
+parklot[work].mainarea.($0|guardroom.(server.IPMS.$1|$2))|driver[e5,e6,tom,s,-,-,-,-,-,-,-].$3
+->
+parklot[work].mainarea.($0|guardroom.(server.IPMS.$1|$2))|driver[e5,e6,tom,s,-,-,-,-,-,l,-].$3;
+
+##RULES loginout
+parklot[work].mainarea.($0|guardroom.(server.IPMS.$1)|$2)|driver[e5,e6,tom,s,-,-,-,-,-,l,-].$3
+->
+parklot[work].mainarea.($0|guardroom.(server.IPMS.$1)|$2)|driver[e5,e6,tom,s,-,-,-,-,-,-,-].$3;
+
+#RULES enter road1
+road1.$0|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$1|$2)|$3->
+road1.($0|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$1|$2))|$3;
+#RULES leave road1
+road1.($0|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$1|$2))|$3->
+road1.$0|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$1|$2)|$3;
+
+#RULES enter road2
+road2.$0|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$1|$2)|$3->
+road2.($0|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$1|$2))|$3;
+#RULES leave road2
+road2.($0|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$1|$2))|$3->
+road2.$0|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$1|$2)|$3;
+
+#RULES enter road3
+road3.$0|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$1|$2)|$3->
+road3.($0|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$1|$2))|$3;
+#RULES leave road3
+road3.($0|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$1|$2))|$3->
+road3.$0|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$1|$2)|$3;
+
+
+#RULES enter mall
+road3.(car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$1|$2)|$3)|mall[work]|$4->
+road3.$3|mall[work].car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$1|$2)|$4;
+#RULES leave mall
+road3.$3|mall[work].car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$1|$2)|$4;->
+road3.(car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$1|$2)|$3)|mall[work]|$4
+
+#RULES enter parksign
+road2.(parksign[pk].$0|$1)|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$2|$3)|$4->
+road2.($1|parksign[pk].($0|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$2|$3)))|$4;
+#RULES leave parksign
+road2.($1|parksign.($0|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$2|$3)))|$4->
+road2.(parksign[pk].$0|$1)|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$2|$3)|$4;
+
+#RULES enter parklot[work]//add apot condition 6zhong
+parklot[work].mainarea.($0|spot[-,-,-,-,-,-])|road2.($1|parksign[pk].($2|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$3)))|$4
+->
+parklot[work].mainarea.($0|spot[used,-,-,-,-,-]|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$3))|road2.($1|parksign[pk].($2))|$4;
+#0used
+parklot[work].mainarea.($0|spot[-,-,-,-,-,-])|road2.($1|parksign[pk].($2|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$3)))|$4
+->
+parklot[work].mainarea.($0|spot[used,-,-,-,-,-]|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$3))|road2.($1|parksign[pk].($2))|$4;
+
+#1used
+parklot[work].mainarea.($0|spot[used,-,-,-,-,-])|road2.($1|parksign[pk].($2|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$3)))|$4
+->
+parklot[work].mainarea.($0|spot[used,used,-,-,-,-]|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$3))|road2.($1|parksign[pk].($2))|$4;
+
+#2used
+parklot[work].mainarea.($0|spot[used,used,-,-,-,-])|road2.($1|parksign[pk].($2|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$3)))|$4
+->
+parklot[work].mainarea.($0|spot[used,used,used,-,-,-]|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$3))|road2.($1|parksign[pk].($2))|$4;
+
+#3used
+parklot[work].mainarea.($0|spot[used,used,used,-,-,-])|road2.($1|parksign[pk].($2|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$3)))|$4
+->
+parklot[work].mainarea.($0|spot[used,used,used,used,-,-]|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$3))|road2.($1|parksign[pk].($2))|$4;
+
+#4used
+parklot[work].mainarea.($0|spot[used,used,used,used,-,-])|road2.($1|parksign[pk].($2|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$3)))|$4
+->
+parklot[work].mainarea.($0|spot[used,used,used,used,used,-]|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$3))|road2.($1|parksign[pk].($2))|$4;
+
+#5used
+parklot[work].mainarea.($0|spot[used,used,used,used,used,-])|road2.($1|parksign[pk].($2|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$3)))|$4
+->
+parklot[work].mainarea.($0|spot[used,used,used,used,used,used]|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$3))|road2.($1|parksign[pk].($2))|$4;
+
+
+#RULES leave parklot[work]
+#1used
+parklot[work].mainarea.($0|spot[used,-,-,-,-,-])|road2.($1|parksign[pk].($2|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$3)))|$4
+->
+parklot[work].mainarea.($0|spot[-,-,-,-,-,-]|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$3))|road2.($1|parksign[pk].($2))|$4;
+
+#2used
+parklot[work].mainarea.($0|spot[used,used,-,-,-,-])|road2.($1|parksign[pk].($2|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$3)))|$4
+->
+parklot[work].mainarea.($0|spot[used,-,-,-,-,-]|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$3))|road2.($1|parksign[pk].($2))|$4;
+
+#3used
+parklot[work].mainarea.($0|spot[used,used,used,-,-,-])|road2.($1|parksign[pk].($2|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$3)))|$4
+->
+parklot[work].mainarea.($0|spot[used,used,-,-,-,-]|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$3))|road2.($1|parksign[pk].($2))|$4;
+
+#4used
+parklot[work].mainarea.($0|spot[used,used,used,used,-,-])|road2.($1|parksign[pk].($2|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$3)))|$4
+->
+parklot[work].mainarea.($0|spot[used,used,used,-,-,-]|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$3))|road2.($1|parksign[pk].($2))|$4;
+
+#5used
+parklot[work].mainarea.($0|spot[used,used,used,used,used,-])|road2.($1|parksign[pk].($2|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$3)))|$4
+->
+parklot[work].mainarea.($0|spot[used,used,used,used,-,-]|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$3))|road2.($1|parksign[pk].($2))|$4;
+
+#6used
+parklot[work].mainarea.($0|spot[used,used,used,used,used,used])|road2.($1|parksign[pk].($2|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$3)))|$4
+->
+parklot[work].mainarea.($0|spot[used,used,used,used,used,-]|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$3))|road2.($1|parksign[pk].($2))|$4;
+
+
+
+#RULES enter leftsign
+road2.(leftsign[lf].$0|$1)|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$2|$3)|$4->
+road2.($1|leftsign[lf].($0|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$2|$3)))|$4;
+#RULES leave leftsign
+road2.($1|leftsign[lf].($0|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$2|$3)))|$4->
+road2.(leftsign[lf].$0|$1)|car[c1].(driver[e5,e6,tom,s,-,-,-,-,-,-,-].$2|$3)|$4;
+
+#guard
+#enter parklot[work](mainarea)
+guard[jack,-,-]|parklot[work].mainarea.$0->
+parklot[work].mainarea.(guard[jack,-,-]|$0);
+#exit parklot[work](mainarea)
+parklot[work].mainarea.(guard[jack,-,-]|$0)->
+guard[jack,-,-]|parklot[work].mainarea.$0;
+
+#enter guardroom
+parklot[work].mainarea.(guard[jack,-,-]|guardroom.$0|$1)->
+parklot[work].mainarea.(guardroom.(guard[jack,-,-]|$0)|$1);
+#exit guardroom
+parklot[work].mainarea.(guardroom.(guard[jack,-,-]|$0)|$1)->
+parklot[work].mainarea.(guard[jack,-,-]|guardroom.$0|$1);
+
+#guard login server
+parklot[work].mainarea.(guardroom.(guard[jack,-,-]|$0)|$1)->
+parklot[work].mainarea.(guardroom.(guard[jack,l,-]|$0)|$1);
+#guard unlogin server
+parklot[work].mainarea.(guardroom.(guard[jack,l,-]|$0)|$1)->
+parklot[work].mainarea.(guardroom.(guard[jack,-,-]|$0)|$1);
+
+#guard read record
+parklot[work].mainarea.(guardroom.(guard[jack,l,-]|$0)|$1)->
+parklot[work].mainarea.(guardroom.(guard[jack,l,re]|$0)|$1);
+#guard unread record
+parklot[work].mainarea.(guardroom.(guard[jack,l,re]|$0)|$1)->
+parklot[work].mainarea.(guardroom.(guard[jack,l,-]|$0)|$1);
+
+#driver enter guardroom
+mainarea.(driver[e5,e6,tom,-,-,-,-,-,-,-,-].$0|guardroom.$1)|$2->
+mainarea.(guardroom.(driver[e5,e6,tom,-,-,-,-,-,-,-,-].$0|$1))|$2;
+#driver exit guardroom
+mainarea.(guardroom.(driver[e5,e6,tom,-,-,-,-,-,-,-,-].$0|$1))|$2->
+mainarea.(driver[e5,e6,tom,-,-,-,-,-,-,-,-].$0|guardroom.$1)|$2;
+
+#driver read record
+mainarea.(guardroom.(guard[jack,l,-]|driver[e5,e6,tom,-,-,-,-,-,-,-,-].$0|$1))|$2->
+mainarea.(guardroom.(guard[jack,l,-]|driver[e5,e6,tom,-,-,-,-,-,-,-,re].$0|$1))|$2;
+#driver unread record
+mainarea.(guardroom.(guard[jack,l,-]|driver[e5,e6,tom,-,-,-,-,-,-,-,re].$0|$1))|$2->
+mainarea.(guardroom.(guard[jack,l,-]|driver[e5,e6,tom,-,-,-,-,-,-,-,-].$0|$1))|$2;
+
+%property resourcerecue !matches(guardroom.(guard[jack,l,-]|driver[e5,e6,tom,-,-,-,-,-,-,-,re].$0));
+#%property deadlock_free !terminal();
+%check

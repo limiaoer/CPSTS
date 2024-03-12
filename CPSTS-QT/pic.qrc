@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/">
+        <file>img/copy.png</file>
+        <file>img/cut.png</file>
+        <file>img/edit_redo.png</file>
+        <file>img/edit_undo.png</file>
+        <file>img/exam.png</file>
+        <file>img/newProcess.png</file>
+        <file>img/openBigraph.png</file>
+        <file>img/openProcess.png</file>
+        <file>img/paste.png</file>
+        <file>img/saveProcess.png</file>
+        <file>img/translate .png</file>
+        <file>img/version.png</file>
+        <file>img/transAndExam.png</file>
+    </qresource>
+</RCC>

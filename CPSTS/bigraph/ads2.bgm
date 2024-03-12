@@ -1,0 +1,17 @@
+#position
+%active road2 : 1;
+%active road3 : 1;
+%active spot5 : 1;
+%active spot3 : 1;
+%active AV : 1;
+%active car4 : 1;
+
+#state
+road2.spot5.AV|road3.spot3.car4;
+
+#turnright
+spot5.($0|AV.$1)|spot3.$2->
+spot5.$0|spot3.(AV.$1|$2);
+
+%property CppResourceSecue !matches(spot3.(car4|AV.$1|$2));
+%check

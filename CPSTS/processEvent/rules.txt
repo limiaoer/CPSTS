@@ -1,0 +1,14 @@
+RULES1 :=in↘(r,car)STOP
+RULES2:=out↘(r, car)STOP
+RULES3:=accelerate↘(r,car)STOP
+RULES4:=true>>(brake↘(r,C1) STOP)
+RULES5:=(enter↘(r,road2) STOP)
+RULES7:=Fjudge(Fptp(x,y,z),parklot)n(5,20)>>(login↘ (r,IPMS) STOP)
+RULES11:=Fjudge(Fptp(x,y,z),guardroom)˄(5,20)>>(read↘(r,record) STOP)
+RULES12:=Fjudge(Fptp(x,y,z),guardroom)˄(5,20)>>(enter↘(r ,guardroom) STOP)
+RULES13:=Fjudge(Fptp(x,y,z),guardroom)˄(5,20)>>(exit ↘( r,guardroom) STOP)
+RULES14:=(5,20)>>(enter↘ ( r,mainarea) STOP)
+
+
+
+

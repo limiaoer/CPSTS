@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>775</width>
+    <height>565</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <widget class="QTextEdit" name="textEdit">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>170</y>
+      <width>256</width>
+      <height>192</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTabWidget" name="tabWidget">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>220</y>
+      <width>123</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <property name="currentIndex">
+     <number>-1</number>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>775</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFIle">
+    <property name="title">
+     <string>FIle</string>
+    </property>
+    <addaction name="actionNewProcess"/>
+    <addaction name="actionImportProcess"/>
+    <addaction name="actionSaveProcess"/>
+    <addaction name="separator"/>
+    <addaction name="actionImportBigraph"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <addaction name="actionTranslate"/>
+    <addaction name="actionExam"/>
+    <addaction name="actionTransAndExam"/>
+    <addaction name="separator"/>
+    <addaction name="actionCopy"/>
+    <addaction name="actionPaste"/>
+    <addaction name="actionCut"/>
+    <addaction name="actionUndo"/>
+    <addaction name="actionRedo"/>
+   </widget>
+   <widget class="QMenu" name="menuAbout">
+    <property name="title">
+     <string>About</string>
+    </property>
+    <addaction name="actionVersion"/>
+   </widget>
+   <addaction name="menuFIle"/>
+   <addaction name="menuEdit"/>
+   <addaction name="menuAbout"/>
+  </widget>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionNewProcess"/>
+   <addaction name="actionSaveProcess"/>
+   <addaction name="actionImportProcess"/>
+   <addaction name="separator"/>
+   <addaction name="actionImportBigraph"/>
+   <addaction name="separator"/>
+   <addaction name="actionTranslate"/>
+   <addaction name="actionExam"/>
+   <addaction name="actionTransAndExam"/>
+  </widget>
+  <action name="actionNewProcess">
+   <property name="icon">
+    <iconset resource="pic.qrc">
+     <normaloff>:/img/newProcess.png</normaloff>:/img/newProcess.png</iconset>
+   </property>
+   <property name="text">
+    <string>NewProcess</string>
+   </property>
+  </action>
+  <action name="actionImportProcess">
+   <property name="icon">
+    <iconset resource="pic.qrc">
+     <normaloff>:/img/openProcess.png</normaloff>:/img/openProcess.png</iconset>
+   </property>
+   <property name="text">
+    <string>ImportProcess</string>
+   </property>
+  </action>
+  <action name="actionSaveProcess">
+   <property name="icon">
+    <iconset resource="pic.qrc">
+     <normaloff>:/img/saveProcess.png</normaloff>:/img/saveProcess.png</iconset>
+   </property>
+   <property name="text">
+    <string>SaveProcess</string>
+   </property>
+  </action>
+  <action name="actionImportBigraph">
+   <property name="icon">
+    <iconset resource="pic.qrc">
+     <normaloff>:/img/openBigraph.png</normaloff>:/img/openBigraph.png</iconset>
+   </property>
+   <property name="text">
+    <string>ImportBigraph</string>
+   </property>
+  </action>
+  <action name="actionTranslate">
+   <property name="icon">
+    <iconset resource="pic.qrc">
+     <normaloff>:/img/translate .png</normaloff>:/img/translate .png</iconset>
+   </property>
+   <property name="text">
+    <string>Translate</string>
+   </property>
+  </action>
+  <action name="actionExam">
+   <property name="icon">
+    <iconset resource="pic.qrc">
+     <normaloff>:/img/exam.png</normaloff>:/img/exam.png</iconset>
+   </property>
+   <property name="text">
+    <string>Exam</string>
+   </property>
+  </action>
+  <action name="actionTransAndExam">
+   <property name="icon">
+    <iconset resource="pic.qrc">
+     <normaloff>:/img/transAndExam.png</normaloff>:/img/transAndExam.png</iconset>
+   </property>
+   <property name="text">
+    <string>TransAndExam</string>
+   </property>
+  </action>
+  <action name="actionCopy">
+   <property name="icon">
+    <iconset resource="pic.qrc">
+     <normaloff>:/img/copy.png</normaloff>:/img/copy.png</iconset>
+   </property>
+   <property name="text">
+    <string>copy</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
+   </property>
+  </action>
+  <action name="actionPaste">
+   <property name="icon">
+    <iconset resource="pic.qrc">
+     <normaloff>:/img/paste.png</normaloff>:/img/paste.png</iconset>
+   </property>
+   <property name="text">
+    <string>paste</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+V</string>
+   </property>
+  </action>
+  <action name="actionCut">
+   <property name="icon">
+    <iconset resource="pic.qrc">
+     <normaloff>:/img/cut.png</normaloff>:/img/cut.png</iconset>
+   </property>
+   <property name="text">
+    <string>cut</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+X</string>
+   </property>
+  </action>
+  <action name="actionUndo">
+   <property name="icon">
+    <iconset resource="pic.qrc">
+     <normaloff>:/img/edit_undo.png</normaloff>:/img/edit_undo.png</iconset>
+   </property>
+   <property name="text">
+    <string>undo</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Z</string>
+   </property>
+  </action>
+  <action name="actionRedo">
+   <property name="icon">
+    <iconset resource="pic.qrc">
+     <normaloff>:/img/edit_redo.png</normaloff>:/img/edit_redo.png</iconset>
+   </property>
+   <property name="text">
+    <string>redo</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Y</string>
+   </property>
+  </action>
+  <action name="actionVersion">
+   <property name="icon">
+    <iconset resource="pic.qrc">
+     <normaloff>:/img/version.png</normaloff>:/img/version.png</iconset>
+   </property>
+   <property name="text">
+    <string>version</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="pic.qrc"/>
+ </resources>
+ <connections/>
+</ui>
